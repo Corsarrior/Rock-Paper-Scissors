@@ -1,88 +1,108 @@
 // Create function that generate the selection of the computer
-function computerPlay(){
+function computerPlay() {
     //Create an array with the selection options
     const gameOption = ['rock', 'paper', 'scissor'];
     //Randomly choose between the options
     let computerSelection = gameOption[randomIntFromInterval(0, 2)];
     //Return the result in console
-    console.log("computer selection: " + computerSelection);
+    let buttonSelection = document.querySelector(`#${computerSelection}`);
+    // buttonSelection.style.backgroundColor = 'salmon';
+    // textComputerSelection.textContent("Computer selection: " + computerSelection);
     return computerSelection;
 
 }
 
 function randomIntFromInterval(min, max) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min);
-  }
+}
 
-// function titleCase(str) {
-//     return str.toLowerCase().split(' ').map(function(word) {
-//       return word.replace(word[0], word[0].toUpperCase());
-//     }).join(' ');
-//   }
-  
-function playRound(playerSelection, computerSelection){
+
+function playRound(playerSelection, computerSelection) {
     // Function that receive the selection of the player and the computer to return
     // the winner of the round.
 
     //Make case insensitive playerSelection
-    playerSelection = playerSelection.toLowerCase();
     console.log("Player Selection: ", playerSelection);
 
     // Evaluate if both values are equal
-    if (playerSelection === computerSelection){
+    if (playerSelection === computerSelection) {
         return 0;
     }
-     // Else, evaluate if the values are paper or scissor, scissor or stone, or paper and stone
-        // Return in each case the winner selection after a evaluation
-     else if ((playerSelection == "paper" || playerSelection == "scissor") && (computerSelection == "paper" || computerSelection == "scissor")){
-       return (playerSelection == "scissor" ? 1 : 2);
+    // Else, evaluate if the values are paper or scissor, scissor or stone, or paper and stone
+    // Return in each case the winner selection after a evaluation
+    else if ((playerSelection == "paper" || playerSelection == "scissor") && (computerSelection == "paper" || computerSelection == "scissor")) {
+        return (playerSelection == "scissor" ? 1 : 2);
     }
-    else if ((playerSelection == "rock" || playerSelection == "scissor") && (computerSelection == "rock" || computerSelection == "scissor")){
+    else if ((playerSelection == "rock" || playerSelection == "scissor") && (computerSelection == "rock" || computerSelection == "scissor")) {
         return (playerSelection == "rock" ? 1 : 2);
-     }
-
-     else if ((playerSelection == "paper" || playerSelection == "rock") && (computerSelection == "paper" || computerSelection == "rock")){
-        return (playerSelection == "paper" ? 1 : 2);
-     } 
-
-     else{
-        console.log("Error: No comparation found it, there is no winner")
-        return null;
-     }
-   
-}
- 
-function game(){
-
-    let playerSelection;
-    let playerScore = 0;
-    let computerScore = 0;
-    // 5 round to define the winner
-    for (let i = 0; i < 5; i++){
-        //promt to the player its selection
-        playerSelection = prompt("What is your selection?: ");
-        computerSelection = computerPlay();
-        roundWinner = playRound(playerSelection, computerSelection);
-        console.log("roundWinner: " + roundWinner)
-        //Keep score of the winner
-        //Show in console the winner of the round
-        if (roundWinner == 1){
-            playerScore++;
-            console.log(`You Win! ${playerSelection} beats ${computerSelection}`)
-        }
-        else if(roundWinner == 2){
-            computerScore++;
-            console.log(`You Lose! ${computerSelection} beats ${playerSelection}`)
-        }
-        else if (roundWinner == 0){
-            console.log(`${playerSelection} is equal to ${computerSelection}`)
-        }
-
-        console.log("playerScore: " + playerScore + " computerScore: " + computerScore);
     }
-    //Show in console the winner of the game
-    console.log(playerScore > computerScore ? "Congratulations! You wins": 
-        playerScore < computerScore ? "Sorry, you loose" : "Tie");
+
+    else if ((playerSelection == "paper" || playerSelection == "rock") && (computerSelection == "paper" || computerSelection == "rock")) {
+        return (playerSelection == "paper" ? 1 : 2);
+    }
+
+    else {
+        // textResults.textContent("Error: No comparation found it, there is no winner");
+        return 0;
+    }
+
 }
 
-game();
+function game(playerSelection) {
+
+    //promt to the player its selection
+    let computerSelection = computerPlay();
+    let roundWinner = playRound(playerSelection, computerSelection);
+    console.log("round winner: " + roundWinner);
+    firstText.textContent = (roundWinner == 1) ? ("round winner: player") : (roundWinner == 2) ? ("round winner: computer") : ("round winner: nobody");
+    //Keep score of the winner
+    //Show in console the winner of the round
+    if (roundWinner == 1) {
+        playerScore++;
+        textPlayerScore.textContent = playerScore.toString();
+        secondText.textContent = (`${playerSelection} beats ${computerSelection}`);
+    }
+    else if (roundWinner == 2) {
+        computerScore++;
+        textComputerScore.textContent = computerScore.toString();
+        secondText.textContent = (`${computerSelection} beats ${playerSelection}`);
+    }
+    else if (roundWinner == 0) {
+        secondText.textContent = (`${playerSelection} is equal to ${computerSelection}`)
+    }
+
+    // text.append("playerScore: " + playerScore + " computerScore: " + computerScore);
+
+}
+
+let playerSelection;
+let playerScore = 0;
+let computerScore = 0;
+// 5 round to define the winner
+
+const buttons = document.querySelectorAll('#buttons-player');
+let firstText = document.querySelector('#first-text');
+let secondText = document.querySelector('#second-text');
+// const textResults = document.querySelector('.text');
+// const textPlayerSelection = document.querySelector('#playerSelection');
+// const textComputerSelection = document.querySelector('#computerSelection');
+let textPlayerScore = document.querySelector('#playerScore');
+let textComputerScore = document.querySelector('#computerScore');
+
+buttons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        if (playerScore < 5 && computerScore < 5) {
+            playerSelection = e.target.value;
+            // textPlayerSelection.textContent(playerSelection);
+            game(playerSelection);
+            console.log("player score: " + playerScore + " computer score: " + computerScore);
+            if (playerScore == 5 || computerScore == 5) {
+                //Show in console the winner of the game
+                firstText.textContent = (playerScore > computerScore) ? "Congratulations! You wins" :
+                    (playerScore < computerScore) ? "Sorry, you loose" : "Tie";
+
+            }
+        }
+
+    })
+});

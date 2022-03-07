@@ -1,13 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src='main.js'></script>
+    <title>Rock, Paper and Scissors</title>
+    <script src='main.js' defer></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "PressStart2P";
+        }
+
+        :root {
+            --width: max(200px, 40vw);
+        }
+
+        header {
+            /* border: 1px solid blue; */
+            height: 32.5vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #0c0a38;
+        }
+
+        body {
+            background-color: #F5E83B;
+        }
+
+        @font-face {
+            font-family: "PressStart2P";
+            src: url('PressStart2P-Regular.ttf') format('woff2 supports variations'),
+                url('PressStart2P-Regular.ttf') format('woff2-variations');
+            font-weight: 100 900;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+        }
+
+        .card-parent {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            /* border: 1px solid green; */
+
+        }
+
+        .card {
+            width: 40%;
+            /* border: 3px solid #E9F1F7; */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: stretch;
+            text-align: center;
+            font-size: calc(var(--width) * 0.04);
+        }
+
+        .wrapper {
+
+            width: var(--width);
+            height: calc(var(--width) * 0.5);
+            /* border: 1px solid red; */
+            display: flex;
+            justify-content: space-evenly;
+            gap: 20px;
+        }
+
+        .scores {
+            /* border: 1px solid rgb(234, 0, 255); */
+            font-size: large;
+        }
+
+        .text {
+            /* border: 1px solid rgb(38, 138, 83); */
+            font-size: calc(var(--width) * 0.06);
+            text-align: center;
+            line-height: 1.3em;
+            color: aliceblue;
+            text-shadow: 3px 2px #181717;
+        }
+
+        #second-text {
+            font-size: calc(var(--width) * 0.04);
+        }
+
+        .buttons {
+            /* border: 1px solid rgb(3, 19, 24); */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        button:active {
+            background-color: #ffbf00;
+        }
+
+        .score {
+            font-size: xx-large;
+        }
+
+        button {
+            font-size: small;
+        }
+
+        .selections {
+            border: 1px solid rgb(46, 119, 46);
+            display: flex;
+            justify-content: space-evenly;
+            width: var(--width);
+        }
+
+        span {
+            /* border: 1px solid rgb(26, 25, 25); */
+        }
+    </style>
 </head>
+<header>
+    <h1>ROCK, PAPER AND SCISSORS</h1>
+</header>
+
 <body>
-    
+    <div class="card-parent">
+        <div class="text">
+            <p id="first-text">
+                Are you ready?
+            </p>
+            <p id="second-text">
+                5 points to win
+            </p>
+        </div>
+        <div class="wrapper">
+            <div class="card">
+                <div>
+                    Player
+                </div>
+                <div class="scores">
+                    <span class="score" id="playerScore">0</span>
+                </div>
+
+                <div class="buttons" id="buttons-player">
+                    <button value="rock">Rock</button>
+                    <button value="paper">Paper</button>
+                    <button value="scissor">Scissor</button>
+                </div>
+            </div>
+            <div class="card">
+                <div>
+                    Computer
+                </div>
+                <div class="scores">
+                    <span class="score" id="computerScore">0</span>
+                </div>
+
+                <div class="buttons">
+                    <button id="rock">Rock</button>
+                    <button id="paper">Paper</button>
+                    <button id="scissor">Scissor</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
+
 </html>
