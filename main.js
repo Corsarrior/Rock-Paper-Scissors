@@ -1,3 +1,4 @@
+
 // Create function that generate the selection of the computer
 function computerPlay() {
     //Create an array with the selection options
@@ -6,8 +7,6 @@ function computerPlay() {
     let computerSelection = gameOption[randomIntFromInterval(0, 2)];
     //Return the result in console
     let buttonSelection = document.querySelector(`#${computerSelection}`);
-    // buttonSelection.style.backgroundColor = 'salmon';
-    // textComputerSelection.textContent("Computer selection: " + computerSelection);
     return computerSelection;
 
 }
@@ -15,7 +14,6 @@ function computerPlay() {
 function randomIntFromInterval(min, max) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
-
 
 function playRound(playerSelection, computerSelection) {
     // Function that receive the selection of the player and the computer to return
@@ -42,7 +40,7 @@ function playRound(playerSelection, computerSelection) {
     }
 
     else {
-        // textResults.textContent("Error: No comparation found it, there is no winner");
+        ;
         return 0;
     }
 
@@ -71,21 +69,15 @@ function game(playerSelection) {
         secondText.textContent = (`${playerSelection} is equal to ${computerSelection}`)
     }
 
-    // text.append("playerScore: " + playerScore + " computerScore: " + computerScore);
-
 }
 
 let playerSelection;
 let playerScore = 0;
 let computerScore = 0;
-// 5 round to define the winner
 
 const buttons = document.querySelectorAll('#buttons-player');
 let firstText = document.querySelector('#first-text');
 let secondText = document.querySelector('#second-text');
-// const textResults = document.querySelector('.text');
-// const textPlayerSelection = document.querySelector('#playerSelection');
-// const textComputerSelection = document.querySelector('#computerSelection');
 let textPlayerScore = document.querySelector('#playerScore');
 let textComputerScore = document.querySelector('#computerScore');
 
@@ -93,7 +85,6 @@ buttons.forEach(button => {
     button.addEventListener('click', (e) => {
         if (playerScore < 5 && computerScore < 5) {
             playerSelection = e.target.value;
-            // textPlayerSelection.textContent(playerSelection);
             game(playerSelection);
             console.log("player score: " + playerScore + " computer score: " + computerScore);
             if (playerScore == 5 || computerScore == 5) {
