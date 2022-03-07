@@ -79,6 +79,5 @@ querySelectorAll to add the listener and define the logic of functions that will
 
 - Twitter - [@JuanQB94](https://www.twitter.com/yourusername)
 
-# Rock-Paper-Scissors
 
 
